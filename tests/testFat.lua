@@ -5,16 +5,32 @@ TestSuccess = {}
     function TestSuccess:setUp() 
         -- this function is run before each test, so that multiple
         -- tests can share initialisations
-        self.a = 1
-        self.b = 2
         print("This method does actually nothing...")
-    end    
+    end 
+    
+    function TestSuccess:tearDown()
+        print("Test has finished...")
+    end
 
     function TestSuccess:testWithFive()
         local x = 5
         local result = fat(x)
-        luaunit.assertEquals(type(result), 'number')
-        luaunit.assertEquals(result, 120)
+        assertEquals(type(result), 'number')
+        assertEquals(result, 120)
     end
 
-luaunit.run()
+    function TestSuccess:testWithSix()
+        local x = 6
+        local result = fat(x)
+        assertEquals(type(result), 'number')
+        assertEquals(result, 720)
+    end
+
+    function TestSuccess:testWithZero()
+        local x = 0
+        local result = fat(x)
+        assertEquals(type(result), 'number')
+        assertEquals(result, 1)
+    end
+
+run()
